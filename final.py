@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 import matplotlib
 from io import BytesIO
+import matplotlib.font_manager as fm
 
 def get_stock_info(market_type = None):
     base_url= "http://kind.krx.co.kr/corpgeneral/corpList.do"
@@ -67,7 +68,7 @@ if(clicked == True):
     st.subheader(f"[{stock_name}] 주가 데이터")
     st.dataframe(df.head())
 
-    matplotlib.rcParams['font.family'] = 'Malgun Gothic'
+    fontprop = fm.FontProperties(fname='NanumGothic.ttf', size=18)
     matplotlib.rcParams['axes.unicode_minus'] = False
 
     ax = df['Close'].plot(grid=True, figsize=(15,5))
