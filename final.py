@@ -40,14 +40,9 @@ def get_ticker_symbol(company_name, market_type):
     return ticker_symbol
 
 st.title("주식 정보를 가져오는 웹 앱")
-st.markdown(
-    """
 
-    <style>
-    [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{width:250px;}
-    </style>
-    """, unsafe_allow_html=True
-)
+radio_options = ['코스피', '코스닥']
+radio_selected = st.sidebar.radio('증권시장', radio_options)
 st.sidebar.header("회사 이름과 기간 입력")
 
 stock_name = st.sidebar.text_input('회사 이름', value="NAVER")
@@ -55,7 +50,11 @@ date_range = st.sidebar.date_input("시작일과 종료일",
                 [datetime.date(2019, 1, 1), datetime.date(2021, 12, 31)])
 
 clicked = st.sidebar.button("주가 데이터 가져오기")
-
+if clicked:
+    market_type = 'kospi'
+    if radio_selected == '코스닥':
+        market_type = 'kosdaq'
+        
 if(clicked == True):
     ticker_symbol = get_ticker_symbol(stock_name, "kospi")
     ticker_data = yf.Ticker(ticker_symbol)
