@@ -1,0 +1,3 @@
+defalut-jre
+korean*
+fonts-unfonts-core
